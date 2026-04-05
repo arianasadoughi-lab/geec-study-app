@@ -2049,24 +2049,24 @@ function renderDiagrams(lid) {
             <!-- YFE dashed line -->
             <line class="yfe-line" x1="300" y1="25" x2="300" y2="400" id="yfe-line"/>
             <text class="ax-label" x="294" y="415" font-size="11">Y_FE</text>
-            <!-- AS curve (orange) - initially from (80,390) to (430,60) -->
-            <line id="as1" x1="80" y1="390" x2="420" y2="65" stroke="#e07836" stroke-width="2.5"/>
-            <text id="as1-lbl" x="424" y="62" class="curve-label" fill="#e07836">AS</text>
+            <!-- AS curve (orange) - from (127,390) to (420,110), passes through (300,225) -->
+            <line id="as1" x1="127" y1="390" x2="420" y2="110" stroke="#e07836" stroke-width="2.5"/>
+            <text id="as1-lbl" x="424" y="107" class="curve-label" fill="#e07836">AS</text>
             <!-- AS2 shifted (hidden) -->
-            <line id="as2" x1="80" y1="390" x2="420" y2="65" stroke="#e07836" stroke-width="2" stroke-dasharray="7,4" opacity="0"/>
+            <line id="as2" x1="127" y1="390" x2="420" y2="110" stroke="#e07836" stroke-width="2" stroke-dasharray="7,4" opacity="0"/>
             <text id="as2-lbl" x="0" y="0" class="curve-label" fill="#e07836" opacity="0">AS'</text>
-            <!-- AD curve (blue) - initially from (80,60) to (420,380) -->
-            <line id="ad1" x1="80" y1="65" x2="420" y2="385" stroke="#3b7dd8" stroke-width="2.5"/>
-            <text id="ad1-lbl" x="424" y="388" class="curve-label" fill="#3b7dd8">AD</text>
+            <!-- AD curve (blue) - from (80,60) to (420,315), passes through (300,225) -->
+            <line id="ad1" x1="80" y1="60" x2="420" y2="315" stroke="#3b7dd8" stroke-width="2.5"/>
+            <text id="ad1-lbl" x="424" y="318" class="curve-label" fill="#3b7dd8">AD</text>
             <!-- AD2 shifted (hidden) -->
-            <line id="ad2" x1="80" y1="65" x2="420" y2="385" stroke="#3b7dd8" stroke-width="2" stroke-dasharray="7,4" opacity="0"/>
+            <line id="ad2" x1="80" y1="60" x2="420" y2="315" stroke="#3b7dd8" stroke-width="2" stroke-dasharray="7,4" opacity="0"/>
             <text id="ad2-lbl" x="0" y="0" class="curve-label" fill="#3b7dd8" opacity="0">AD'</text>
             <!-- P* horizontal dotted -->
             <line id="pfe-h" x1="60" y1="225" x2="305" y2="225" stroke="#aaa" stroke-width="1" stroke-dasharray="4,3"/>
             <text id="pfe-lbl" x="34" y="229" font-size="11" fill="#888">P*</text>
             <!-- Equilibrium dot -->
-            <circle id="eq" cx="305" cy="225" r="7" fill="#27ae60"/>
-            <circle id="eq2" cx="305" cy="225" r="0" fill="none" stroke="#27ae60" stroke-width="2" opacity="0"/>
+            <circle id="eq" cx="300" cy="225" r="7" fill="#27ae60"/>
+            <circle id="eq2" cx="300" cy="225" r="0" fill="none" stroke="#27ae60" stroke-width="2" opacity="0"/>
           </svg>
         </div>
         <div class="diagram-controls">
@@ -2227,49 +2227,49 @@ function initDiagrams(lid) {
 // ─── AD/AS SCENARIOS ───
 const ADAS_SCENARIOS = {
   baseline: {
-    ad:{x1:80,y1:65,x2:420,y2:385}, as:{x1:80,y1:390,x2:420,y2:65},
+    ad:{x1:80,y1:60,x2:420,y2:315}, as:{x1:127,y1:390,x2:420,y2:110},
     ad2:null, as2:null,
-    eq:{cx:305,cy:225}, p:{y:225},
+    eq:{cx:300,cy:225}, p:{y:225},
     title:"Baseline Equilibrium", color:"#888",
     text:"Economy is at full employment (Y = Y_FE). AD and AS intersect right at potential output. Price level is stable. Unemployment is at NAIRU.",
     changes:null
   },
   housing: {
-    ad:{x1:80,y1:65,x2:420,y2:385}, as:{x1:80,y1:390,x2:420,y2:65},
-    ad2:{x1:20,y1:65,x2:360,y2:385}, as2:null,
-    eq:{cx:265,cy:248}, p:{y:248},
+    ad:{x1:80,y1:60,x2:420,y2:315}, as:{x1:127,y1:390,x2:420,y2:110},
+    ad2:{x1:20,y1:60,x2:360,y2:315}, as2:null,
+    eq:{cx:273,cy:250}, p:{y:250},
     title:"Housing Wealth Drops → AD Shifts Left", color:"#e74c3c",
     text:"Falling home values → households feel poorer → consumption drops. AD shifts left. New equilibrium: lower output (Y < Y_FE), lower price level. Economy enters recession.",
     changes:[{label:"Output (Y)",dir:"down",note:"Below Y_FE — recession"},{label:"Prices (P)",dir:"down",note:"Deflationary pressure"},{label:"Unemployment",dir:"up",note:"Rises above NAIRU"}]
   },
   fiscal: {
-    ad:{x1:80,y1:65,x2:420,y2:385}, as:{x1:80,y1:390,x2:420,y2:65},
-    ad2:{x1:140,y1:65,x2:420,y2:345}, as2:null,
-    eq:{cx:342,cy:202}, p:{y:202},
+    ad:{x1:80,y1:60,x2:420,y2:315}, as:{x1:127,y1:390,x2:420,y2:110},
+    ad2:{x1:140,y1:60,x2:420,y2:270}, as2:null,
+    eq:{cx:326,cy:200}, p:{y:200},
     title:"Government Spending Increases → AD Shifts Right", color:"#27ae60",
     text:"Fiscal stimulus (higher G) boosts aggregate demand. AD shifts right. Economy moves toward Y_FE. If starting from recession, this helps. If already at Y_FE, it causes overheating.",
     changes:[{label:"Output (Y)",dir:"up",note:"Toward or above Y_FE"},{label:"Prices (P)",dir:"up",note:"Inflationary pressure"},{label:"Unemployment",dir:"down",note:"Falls toward NAIRU"}]
   },
   overheat: {
-    ad:{x1:140,y1:65,x2:420,y2:345}, as:{x1:80,y1:390,x2:420,y2:65},
+    ad:{x1:140,y1:60,x2:420,y2:270}, as:{x1:127,y1:390,x2:420,y2:110},
     ad2:null, as2:null,
-    eq:{cx:342,cy:202}, p:{y:202},
+    eq:{cx:326,cy:200}, p:{y:200},
     title:"Overheated Economy (Y > Y_FE)", color:"#f0a500",
     text:"AD has already shifted right. Equilibrium is to the right of Y_FE — economy is overheating. Unemployment is below NAIRU. Inflationary pressure is building. Central bank should raise rates to cool demand.",
     changes:[{label:"Output (Y)",dir:"up",note:"Y > Y_FE — above potential"},{label:"Prices (P)",dir:"up",note:"Inflation above target"},{label:"Unemployment",dir:"down",note:"Below NAIRU — tight labor market"}]
   },
   oilshock: {
-    ad:{x1:80,y1:65,x2:420,y2:385}, as:{x1:80,y1:390,x2:420,y2:65},
-    ad2:null, as2:{x1:25,y1:390,x2:365,y2:65},
-    eq:{cx:260,cy:202}, p:{y:202},
+    ad:{x1:80,y1:60,x2:420,y2:315}, as:{x1:127,y1:390,x2:420,y2:110},
+    ad2:null, as2:{x1:72,y1:390,x2:365,y2:110},
+    eq:{cx:269,cy:202}, p:{y:202},
     title:"Oil Price Shock → AS Shifts Left (Stagflation)", color:"#8e44ad",
     text:"Supply shock: higher oil prices raise production costs → AS shifts left. Economy enters stagflation — simultaneously lower output AND higher prices. This is the hardest scenario for policy. Note: this is a supply-driven recession, unlike most business cycles.",
     changes:[{label:"Output (Y)",dir:"down",note:"Y < Y_FE — recession"},{label:"Prices (P)",dir:"up",note:"Inflation rises — stagflation"},{label:"Unemployment",dir:"up",note:"Rises despite inflation"}]
   },
   monetary: {
-    ad:{x1:80,y1:65,x2:420,y2:385}, as:{x1:80,y1:390,x2:420,y2:65},
-    ad2:{x1:140,y1:65,x2:420,y2:345}, as2:null,
-    eq:{cx:342,cy:202}, p:{y:202},
+    ad:{x1:80,y1:60,x2:420,y2:315}, as:{x1:127,y1:390,x2:420,y2:110},
+    ad2:{x1:140,y1:60,x2:420,y2:270}, as2:null,
+    eq:{cx:326,cy:200}, p:{y:200},
     title:"Fed Cuts Rates → Monetary Easing → AD Shifts Right", color:"#3b7dd8",
     text:"Lower real interest rates reduce borrowing costs → C↑ and I↑ → AD shifts right. Used to fight recessions. Short-run effect: Y↑, P↑. Long-run: only inflation rises (long-run monetary neutrality).",
     changes:[{label:"Output (Y)",dir:"up",note:"Short-run boost"},{label:"Prices (P)",dir:"up",note:"Inflationary pressure"},{label:"Real rate (r)",dir:"down",note:"r = i − πe falls"}]
@@ -2312,6 +2312,7 @@ function adasScenario(name, btn) {
   const pline = document.getElementById('pfe-h');
   animateAttr(pline,'y1',parseFloat(pline.getAttribute('y1')),sc.p.y,500);
   animateAttr(pline,'y2',parseFloat(pline.getAttribute('y2')),sc.p.y,500);
+  animateAttr(pline,'x2',parseFloat(pline.getAttribute('x2')),sc.eq.cx+5,500);
   const plbl = document.getElementById('pfe-lbl');
   animateAttr(plbl,'y',parseFloat(plbl.getAttribute('y')),sc.p.y+4,500);
 
